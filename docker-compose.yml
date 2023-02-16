@@ -1,0 +1,85 @@
+version: "3.9"
+
+## se controlan con up y down, igualmente se crean y eliminan los contenedores
+services:
+
+  ## Nombre del contenedor
+  mysql8:
+    container_name: mysql8
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=@cam123lo_pass
+      - MYSQL_USER=camilomeneses
+      - MYSQL_PASSWORD=@cam123lo_pass
+      - MYSQL_DATABASE=ms-usuarios
+    volumes:
+      - data-mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - spring
+
+  ## Nombre del contenedor
+  postgres15:
+    container_name: postgres15
+    image: postgres:15.2-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=camilomeneses
+      - POSTGRES_PASSWORD=@cam123lo_pass
+      - POSTGRES_DB=ms-cursos
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - spring
+
+  ## Nombre del contenedor
+  ms-usuarios:
+    container_name: ms-usuarios
+    image: usuarios
+    build:
+      context: ./
+      dockerfile: ./ms-usuarios/Dockerfile
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./ms-usuarios/.env
+    networks:
+      - spring
+    depends_on:
+      - mysql8
+    restart: always
+
+  ## Nombre del contenedor
+  ms-cursos:
+    container_name: ms-cursos
+    image: cursos
+    build:
+      context: ./
+      dockerfile: ./ms-cursos/Dockerfile
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./ms-cursos/.env
+    networks:
+      - spring
+    depends_on:
+      - postgres15
+      - ms-usuarios
+    restart: always
+
+## Los volumes no se afectan con la ejecucion del compose up y down
+## Definicion de volumes
+volumes:
+  data-mysql:
+    name: data-mysql
+  data-postgres:
+    name: data-postgres
+
+## Definicion de networks
+networks:
+  spring:
+    name: spring
