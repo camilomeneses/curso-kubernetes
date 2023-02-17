@@ -1,0 +1,56 @@
+version: "3.9"
+
+## se controlan con up y down, igualmente se crean y eliminan los contenedores
+services:
+
+  ## Nombre del contenedor
+  postgres15:
+    container_name: postgres15
+    image: postgres:15.2-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=ms-cursos
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - spring
+
+  ## Nombre del contenedor
+  ms-cursos:
+    container_name: ms-cursos
+    ## Obtener desde docker hub
+    image: camilomeneses/cursos:latest
+    ## Build local
+    #build:
+    #  context: ./
+    #  dockerfile: ./ms-cursos/Dockerfile
+    ports:
+      - "8002:8002"
+    environment:
+      - APP_NAME=ms-cursos
+      - PORT=8002
+      - DB_HOST=postgres15:5432
+      - DB_DATABASE=ms-cursos
+      - DB_USERNAME=admin
+      - DB_PASSWORD=password
+      - USUARIOS_URL=ec2-18-213-118-148.compute-1.amazonaws.com:8001
+    networks:
+      - spring
+    depends_on:
+      - postgres15
+    restart: always
+
+## Los volumes no se afectan con la ejecucion del compose up y down
+## Definicion de volumes
+volumes:
+  data-postgres:
+    name: data-postgres
+
+## Definicion de networks
+networks:
+  spring:
+    name: spring
