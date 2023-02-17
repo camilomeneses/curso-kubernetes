@@ -1,0 +1,57 @@
+version: "3.9"
+
+## se controlan con up y down, igualmente se crean y eliminan los contenedores
+services:
+
+  ## Nombre del contenedor
+  mysql8:
+    container_name: mysql8
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=ms-usuarios
+    volumes:
+      - data-mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - spring
+
+  ## Nombre del contenedor
+  ms-usuarios:
+    container_name: ms-usuarios
+    ## Obtener desde docker hub
+    image: camilomeneses/usuarios:latest
+    ## Build local
+    #build:
+    #  context: ./
+    #  dockerfile: ./ms-usuarios/Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - APP_NAME=ms-usuarios
+      - PORT=8001
+      - DB_HOST=mysql8:3306
+      - DB_DATABASE=ms-usuarios
+      - DB_USERNAME=admin
+      - DB_PASSWORD=password
+      - CURSOS_URL=ec2-52-86-61-21.compute-1.amazonaws.com:8002
+    networks:
+      - spring
+    depends_on:
+      - mysql8
+    restart: always
+
+## Los volumes no se afectan con la ejecucion del compose up y down
+## Definicion de volumes
+volumes:
+  data-mysql:
+    name: data-mysql
+
+## Definicion de networks
+networks:
+  spring:
+    name: spring
