@@ -47,8 +47,14 @@ services:
     #  dockerfile: ./ms-usuarios/Dockerfile
     ports:
       - "8001:8001"
-    env_file:
-      - ./ms-usuarios/.env
+    environment:
+      - APP_NAME=ms-usuarios
+      - PORT=8001
+      - DB_HOST=mysql8:3306
+      - DB_DATABASE=ms-usuarios
+      - DB_USERNAME=admin
+      - DB_PASSWORD=password
+      - CURSOS_URL=ms-cursos:8002
     networks:
       - spring
     depends_on:
@@ -66,8 +72,14 @@ services:
     #  dockerfile: ./ms-cursos/Dockerfile
     ports:
       - "8002:8002"
-    env_file:
-      - ./ms-cursos/.env
+    environment:
+      - APP_NAME=ms-cursos
+      - PORT=8002
+      - DB_HOST=postgres15:5432
+      - DB_DATABASE=ms-cursos
+      - DB_USERNAME=admin
+      - DB_PASSWORD=password
+      - USUARIOS_URL=ms-usuarios:8001
     networks:
       - spring
     depends_on:
