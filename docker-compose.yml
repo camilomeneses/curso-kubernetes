@@ -10,9 +10,9 @@ services:
     ports:
       - "3307:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=@cam123lo_pass
-      - MYSQL_USER=camilomeneses
-      - MYSQL_PASSWORD=@cam123lo_pass
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password
       - MYSQL_DATABASE=ms-usuarios
     volumes:
       - data-mysql:/var/lib/mysql
@@ -27,8 +27,8 @@ services:
     ports:
       - "5433:5432"
     environment:
-      - POSTGRES_USER=camilomeneses
-      - POSTGRES_PASSWORD=@cam123lo_pass
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=ms-cursos
     volumes:
       - data-postgres:/var/lib/postgresql/data
@@ -39,7 +39,7 @@ services:
   ## Nombre del contenedor
   ms-usuarios:
     container_name: ms-usuarios
-    image: usuarios
+    image: camilomeneses/usuarios
     build:
       context: ./
       dockerfile: ./ms-usuarios/Dockerfile
@@ -56,7 +56,7 @@ services:
   ## Nombre del contenedor
   ms-cursos:
     container_name: ms-cursos
-    image: cursos
+    image: camilomeneses/cursos
     build:
       context: ./
       dockerfile: ./ms-cursos/Dockerfile
