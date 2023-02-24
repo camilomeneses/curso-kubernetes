@@ -37,7 +37,7 @@ services:
       - DB_DATABASE=ms-cursos
       - DB_USERNAME=admin
       - DB_PASSWORD=password
-      - USUARIOS_URL=ec2-18-213-118-148.compute-1.amazonaws.com:8001
+      - USUARIOS_URL=ec2-18-213-118-148.compute-1.amazonaws.com:8001 # AWS EC2, sino es: ms-usuarios:8001
     networks:
       - spring
     depends_on:
