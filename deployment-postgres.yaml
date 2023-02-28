@@ -31,8 +31,5 @@ spec:
               mountPath: /var/lib/postgresql/data
       volumes:
         - name: data-postgres
-          hostPath:
-            # localización del directorio en el host
-            path: /var/lib/postgresql/data
-            # este campo es opcional
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: postgres-pvc

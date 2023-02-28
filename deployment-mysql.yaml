@@ -35,8 +35,6 @@ spec:
             mountPath: /var/lib/mysql
       volumes:
         - name: data-mysql
-          hostPath:
-            # localización del directorio en el host
-            path: /var/lib/mysql
-            # este campo es opcional
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+
