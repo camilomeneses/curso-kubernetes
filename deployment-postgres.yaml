@@ -26,3 +26,13 @@ spec:
               value: password
             - name: POSTGRES_DB
               value: ms-cursos
+          volumeMounts:
+            - name: data-postgres
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: data-postgres
+          hostPath:
+            # localización del directorio en el host
+            path: /var/lib/postgresql/data
+            # este campo es opcional
+            type: DirectoryOrCreate
