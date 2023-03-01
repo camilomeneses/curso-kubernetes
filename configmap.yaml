@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms-usuarios
+data:
+  port: "8001"
+  app_name: ms-usuarios
+  db_host: mysql8:3306
+  database: ms-usuarios
+  username: admin
+  password: password
+  curso_url: ms-cursos:8002
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms-cursos
+data:
+  port: "8002"
+  app_name: ms-cursos
+  db_host: postgres15:5432
+  database: ms-cursos
+  username: admin
+  password: password
+  usuario_url: ms-usuarios:8001
+
