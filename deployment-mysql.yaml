@@ -24,19 +24,19 @@ spec:
         env:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
-              configMapKeyRef:
+              secretKeyRef:
                 name: ms-usuarios
                 key: password
 
           - name: MYSQL_USER
             valueFrom:
-              configMapKeyRef:
+              secretKeyRef:
                 name: ms-usuarios
                 key: username
 
           - name: MYSQL_PASSWORD
             valueFrom:
-              configMapKeyRef:
+              secretKeyRef:
                 name: ms-usuarios
                 key: password
 

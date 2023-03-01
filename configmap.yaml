@@ -7,8 +7,8 @@ data:
   app_name: ms-usuarios
   db_host: mysql8:3306
   database: ms-usuarios
-  username: admin
-  password: password
+  #username: admin
+  #password: password
   curso_url: ms-cursos:8002
 
 ---
@@ -21,7 +21,7 @@ data:
   app_name: ms-cursos
   db_host: postgres15:5432
   database: ms-cursos
-  username: admin
-  password: password
+  #username: admin
+  #password: password
   usuario_url: ms-usuarios:8001
 
