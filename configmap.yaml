@@ -10,7 +10,26 @@ data:
   #username: admin
   #password: password
   curso_url: "ms-cursos:8002"
-
+  profile: "dev"
+  application.yaml: |-
+    config:
+      texto: "Configurando ambiente por defecto"
+    ---
+    spring:
+      config:
+        activate:
+          on-profile: dev
+    config:
+      texto: "Configurando ambiente de desarrollo"
+    ---
+    spring:
+      config:
+        activate:
+          on-profile: prod
+    config:
+      texto: "Configurando ambiente de produccion"
+          
+          
 ---
 apiVersion: v1
 kind: ConfigMap

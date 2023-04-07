@@ -18,6 +18,11 @@ spec:
           ports:
             - containerPort: 8001
           env:
+            - name: PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: ms-usuarios
+                  key: profile
             - name: MY_POD_NAME
               valueFrom:
                 fieldRef:
