@@ -82,3 +82,10 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 30
             timeoutSeconds: 10
+          resources:
+            requests:
+              memory: "800Mi"
+              cpu: "500m"
+            limits:
+              memory: "1000Mi"
+              cpu: "650m"
