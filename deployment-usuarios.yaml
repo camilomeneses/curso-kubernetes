@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: ms-usuarios
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: ms-usuarios
@@ -66,3 +66,19 @@ spec:
                 configMapKeyRef:
                   name: ms-usuarios
                   key: curso_url
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8001
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8001
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
