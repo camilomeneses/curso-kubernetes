@@ -41,5 +41,6 @@ build/
 ## Directorios
 /ms-usuarios
 /ms-cursos
+/ms-gateway
 /logs
 *.log

@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ms-cursos" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ms-gateway" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ms-usuarios" vcs="Git" />
   </component>
 </project>
