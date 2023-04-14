@@ -28,8 +28,7 @@ data:
           on-profile: prod
     config:
       texto: "Configurando ambiente de produccion"
-          
-          
+
 ---
 apiVersion: v1
 kind: ConfigMap
