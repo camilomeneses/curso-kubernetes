@@ -42,5 +42,6 @@ build/
 /ms-usuarios
 /ms-cursos
 /ms-gateway
+/ms-auth
 /logs
 *.log
