@@ -11,6 +11,8 @@ data:
   #password: password
   curso_url: "ms-cursos:8002"
   profile: "dev"
+  lb_auth_issuer_uri: "http://127.0.0.1:9000"
+  lb_usuarios_uri: "http://127.0.0.1:8001"
   application.yaml: |-
     config:
       texto: "Configurando ambiente por defecto"
