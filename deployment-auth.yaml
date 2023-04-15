@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-auth
+  template:
+    metadata:
+      labels:
+        app: ms-auth
+    spec:
+      containers:
+        - image: camilomeneses/auth:latest
+          name: auth
+          ports:
+            - containerPort: 9000
+          env:
+            - name: LB_USUARIOS_URI
+              valueFrom:
+                configMapKeyRef:
+                  key: lb_usuarios_uri
+                  name: ms-usuarios
